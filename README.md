@@ -10,10 +10,10 @@ As part of an Autonomous Underwater Vehicle (AUV) research project for the annua
 
 Credit Given Where Credit is Due:
 Thanks to the following for their contributions online (saved me quite a bit of time from reading 4000+ pages of documentation):
-Working seed (sample code):	Shabaz		      	www.element14.com/community
-Additional Demos:		        Jadonk			      github.com/beagleboard/am335x_pru_package
-						              	Lyren Brown	      groups.google.com
-Quick Assembly Training:		TutorialsPoint		www.tutorialspoint.com/assembly_programming
-							              Texas Instruments	processors.wiki.ti.com/index.php/PRU_Assembly_Instructions
+Working seed (sample code): Shabaz www.element14.com/community
+Additional Demos: Jadonk www.github.com/beagleboard/am335x_pru_package ;
+Lyren Brown www.groups.google.com
+Quick Assembly Training: TutorialsPoint www.tutorialspoint.com/assembly_programming ;
+Texas Instruments www.processors.wiki.ti.com/index.php/PRU_Assembly_Instructions
 
 Note: This repo is not complete and will be built up over time the more I use PRUs in my projects.
