@@ -1,0 +1,55 @@
+// [PackageDev] target_format: plist, ext: tmLanguage
+{ "name": "Sitara PRU",
+  "scopeName": "text.sitara_pru",
+  "fileTypes": ["p", "hp"],
+  "uuid": "30d056ed-2a4e-4f6b-9f90-084658e72474",
+
+  "patterns": [
+	{	"match": "LDI|LBBO|SBBO|LBCO|SBCO",
+		"name": "storage.type.sitara_pru",
+		"comment": "Load / Store Instructions"
+	},
+	{	"match": "ADD|ADC|SUB|SUC|RSB|RSC",
+		"name": "storage.type.sitara_pru",
+		"comment": "Arithmetic Instructions"
+	},
+	{	"match": "AND|OR|XOR|NOT|LSR|LSL|MIN|MAX|CLR|SET|LMBD|SCAN",
+		"name": "storage.type.sitara_pru",
+		"comment": "Logical Instructions"
+	},
+	{	"match": "QBBS|QBBC|QBGT|QBGE|QBLT|QBLE|QBEQ|QBNE|JMP|JAL|HALT|SLP",
+		"name": "storage.type.sitara_pru",
+		"comment": "Program Flow Control Instructions"
+	},
+
+
+	{	"match": "[_a-zA-Z0-9]+(?>:)",
+		"name": "constant.language.sitara_pru",
+		"comment": "Labels: START:"
+	},
+	{	"match": "0x[0-9a-fA-F]+|(?<=![a-zA-Z]|[\\s])[0-9]+(?>![a-zA-Z]|[\\s])",
+		"name": "constant.numeric.sitara_pru",
+		"comment": "Numerical Values: 0, 0xFF"
+	},
+	{	"match": "#[a-zA-Z]+",
+		"name": "keyword.other.sitara_pru",
+		"comment": "Preprocessor Directives: #include"
+	},
+	{	"match": "\\.[a-zA-Z]+",
+		"name": "comment.character.sitara_pru",
+		"comment": "Processor Directives: .origin"
+	},
+	{	"match": "//[\\S ]+(?>\n)|//",
+		"name": "support.other.sitara_pru",
+		"comment": "Comment"
+	},
+	{	"name": "string.quoted.double.sitara_pru",
+		"begin": "\"",
+		"end": "\""
+	},
+	{	"name": "string.quoted.single.sitara_pru",
+		"begin": "'",
+		"end": "'"
+	}
+  ]
+}
