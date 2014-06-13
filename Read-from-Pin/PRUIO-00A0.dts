@@ -1,0 +1,39 @@
+/dts-v1/;
+/plugin/;
+
+/{
+        /* I've only tested this on the beaglebone-black */
+        compatible = "ti,beaglebone-black";
+
+        part-number = "PRUIO";
+        version = "00A0";
+
+        exclusive-use =
+                "P9.27",
+                "P9.28",
+                "pru0";
+
+        fragment@0 {
+                target = <&am33xx_pinmux>;
+                __overlay__ {
+                        pru_pins: pinmux_pru_pins {
+                                pinctrl-single,pins = <
+                                        0x1a4 0x25 /* set P9.27 to mode 5 - PRU_WRITE */
+                                        0x19c 0x26 /* set P9.28 to mode 6 - PRU_READ  */
+                                >;
+                        };
+                };
+        };
+
+        fragment@1 {
+                target = <&pruss>;
+                __overlay__ {
+                        /* enable pru subsytem - equivalent to 'modprobe uio_pruss' */
+                        status = "okay";
+                        
+                        pinctrl-names = "default";
+                        /* assign pins to the subsystem */
+                        pinctrl-0 = <&pru_pins>;
+                };
+        };
+};
