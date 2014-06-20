@@ -27,7 +27,7 @@
 		"name": "constant.language.sitara_pru",
 		"comment": "Labels: START:"
 	},
-	{	"match": "(?<=[\\s,])[0-9a-f]+(?=[\\s,])|(?<=[\\s,])0x[0-9a-fA-F]+(?=[\\s,])|(?<=[\\s,])#[0-9a-fA-Fx]+(?=[\\s,])",
+	{	"match": "(?<=[\\s,])[0-9]+(?=[\\s,])|(?<=[\\s,])0x[0-9a-fA-F]+(?=[\\s,])|(?<=[\\s,])#[0-9a-fA-Fx]+(?=[\\s,])",
 		"name": "constant.numeric.sitara_pru",
 		"comment": "Numerical Values: 0, 0xFF"
 	},
