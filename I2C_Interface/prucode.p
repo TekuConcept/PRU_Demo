@@ -15,7 +15,8 @@
 #include "prucode.hp"
 
 #define I2C 0x4819C000
-
+// I2C-1 = C2
+// I2C-2 = C17
 
 START:
 
@@ -43,13 +44,12 @@ START:
     SBBO      r1, r0, 0, 4
 
     // Reset I2C Subsystem
-    MOV       r0, I2C
     MOV       r1, 0x00000002
-    SBBO      r1, r0, 0x10, 4 // I2C_SYSC
+    SBCO      r1, C17, 0x10, 4 // I2C_SYSC
 
     // Wait for reset to complete
 WAIT0:
-    LBBO      r1, r0, 0x90, 4 // I2C_SYSS
+    LBCO      r1, C17, 0x90, 4 // I2C_SYSS
     QBBC      WAIT0, r1.t0
 
 
@@ -60,71 +60,71 @@ WAIT0:
     // your own risk & backup any and all files as necessary)
 
     MOV       r1, 0x00000001  // (send address + 1 byte)
-    SBBO      r1, r0, 0x98, 4 // I2C_CNT
+    SBCO      r1, C17, 0x98, 4 // I2C_CNT
 
     MOV       r1, 0x00000077  // (slave address for BMP180 sensor)
-    SBBO      r1, r0, 0xAC, 4 // I2C_SA
+    SBCO      r1, C17, 0xAC, 4 // I2C_SA
 
     MOV       r1, 0x0000000B
-    SBBO      r1, r0, 0xB0, 4 // I2C_PSC
+    SBCO      r1, C17, 0xB0, 4 // I2C_PSC
 
     MOV       r1, 0x0000000D
-    SBBO      r1, r0, 0xB4, 4 // I2C_SCLL
+    SBCO      r1, C17, 0xB4, 4 // I2C_SCLL
 
     MOV       r1, 0x0000000F
-    SBBO      r1, r0, 0xB8, 4 // I2C_SCLH
+    SBCO      r1, C17, 0xB8, 4 // I2C_SCLH
 
     MOV       r1, 0x0000636F
-    SBBO      r1, r0, 0x34, 4 // I2C_WE
+    SBCO      r1, C17, 0x34, 4 // I2C_WE
 
     MOV       r1, 0x0000001D  // (re-enable internal clock)
-    SBBO      r1, r0, 0x10, 4 // I2C_SYSC
+    SBCO      r1, C17, 0x10, 4 // I2C_SYSC
 
 
 
     // [-- Begin write sequence --]
 
     MOV       r1, 0x00008601  // Enable I2C, set as Master/TX, and send Start command
-    SBBO      r1, r0, 0xA4, 4 // I2C_CON
+    SBCO      r1, C17, 0xA4, 4 // I2C_CON
 
 WAIT1:
-    LBBO      r1, r0, 0x24, 4
+    LBCO      r1, C17, 0x24, 4
     QBBC      WAIT1, r1.t4    // Wait for XRDY command
-    SBBO      r1, r0, 0x28, 4 // CLEAR
+    SBCO      r1, C17, 0x28, 4 // CLEAR
 
     MOV       r1, 0x000000AA  // (send first address of slave register in BMP180)
-    SBBO      r1, r0, 0x9C, 4 // I2C_DATA
+    SBCO      r1, C17, 0x9C, 4 // I2C_DATA
 
 WAIT2:
-    LBBO      r1, r0, 0x24, 4
+    LBCO      r1, C17, 0x24, 4
     QBBC      WAIT2, r1.t2    // Wait for ARDY command
-    SBBO      r1, r0, 0x28, 4 // CLEAR
+    SBCO      r1, C17, 0x28, 4 // CLEAR
 
     MOV       r1, 0x00008602  // Send Stop command
-    SBBO      r1, r0, 0xA4, 4 // I2C_CON
+    SBCO      r1, C17, 0xA4, 4 // I2C_CON
 
     // reset interrupts for read sequence testing
-    LBBO      r1, r0, 0x24, 4
-    SBBO      r1, r0, 0x28, 4
+    LBCO      r1, C17, 0x24, 4
+    SBCO      r1, C17, 0x28, 4
 
 
 
     // [-- Begin read sequence --]
 
     MOV       r1, 0x00008403  // Set as Master/RX, and send Start & Stop commands
-    SBBO      r1, r0, 0xA4, 4 // I2C_CON
+    SBCO      r1, C17, 0xA4, 4 // I2C_CON
 
 WAIT3:
-    LBBO      r1, r0, 0x24, 4
+    LBCO      r1, C17, 0x24, 4
     QBBC      WAIT3, r1.t3    // Wait for RRDY command
-    SBBO      r1, r0, 0x28, 4 // CLEAR
+    SBCO      r1, C17, 0x28, 4 // CLEAR
 
-    LBBO      r2, r0, 0x9C, 4 // I2C_DATA - read byte from RX queue (should be 0x1F)
+    LBCO      r2, C17, 0x9C, 4 // I2C_DATA - read byte from RX queue (should be 0x1F)
 
 WAIT4:
-    LBBO      r1, r0, 0x24, 4
+    LBCO      r1, C17, 0x24, 4
     QBBC      WAIT4, r1.t2    // Wait for ARDY command
-    SBBO      r1, r0, 0x28, 4 // CLEAR
+    SBCO      r1, C17, 0x28, 4 // CLEAR
 
 
 
