@@ -3,9 +3,9 @@
 
 #include "prucode.hp"
 
-#define EPWMSS0 0x48300200
-#define EPWMSS1 0x48302200
-#define EPWMSS2 0x48304200
+#define EPWMSS0 0x48300200 // also C18 + 200
+#define EPWMSS1 0x48302200 // also C19 + 200
+#define EPWMSS2 0x48304200 // also C20 + 200
 
 // Values aquired from AM335x_Technical Reference Manual Section 15.2.4
 // Time-Base Submodule Registers (Section 15.2.4.1)
